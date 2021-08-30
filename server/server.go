@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"log"
 	"net"
 
@@ -14,10 +16,19 @@ func handleError(err error) {
 	}
 }
 
+var collection = *mongo.Collection
+
 func main() {
 	lis, err := net.Listen("tcp", "0.0.0.:50051")
 	handleError(err)
 
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
 	handleError((err))
+
+	fmt.Println("DB Connected")
+
+	err = client.Connect(context.TODO())
+	handleError(err)
+
+	collection = client.Database("Products").Collection("Product")
 }
