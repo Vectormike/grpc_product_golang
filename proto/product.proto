@@ -1,0 +1,8 @@
+syntax '3'
+
+package product_proto
+option go_package = "/proto";
+
+service ProductService {
+    rpc GetAll (Request) returns (Response);
+}
