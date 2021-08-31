@@ -1,7 +1,14 @@
-syntax '3'
+syntax = "proto3";
 
-package product_proto
+package product_proto;
 option go_package = "/proto";
+
+message Product {
+    int32 id = 1;
+    string name = 2;
+    int32 price = 3;
+    string description = 4;
+}
 
 service ProductService {
     rpc GetAll (Request) returns (Response);
