@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package product_proto;
-option go_package = "/proto";
+option go_package="/proto";
 
 message Product {
     int32 id = 1;
@@ -10,6 +10,29 @@ message Product {
     string description = 4;
 }
 
+message ProductRequest {
+    Product product = 1;
+}
+
+message ProductResponse {
+    string message = 1;
+    string result = 2;
+}
+
+message ProductRequestId {
+    string id = 1;
+}
+
+message ProductList {
+    repeated Product product = 1;
+}
+
+message Empty {}
+
 service ProductService {
-    rpc GetAll (Request) returns (Response);
+    rpc GetAll (Empty) returns (ProductList) {};
+    rpc Get (ProductRequestId) returns (ProductResponse) {};
+    rpc Create (Product) returns (ProductResponse) {};
+    rpc Update (ProductRequestId) returns (ProductResponse) {};
+    rpc Remove (ProductRequestId) returns (Empty) {};
 }
