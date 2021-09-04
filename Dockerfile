@@ -8,4 +8,4 @@ RUN go build -o /product-grpc-server
 
 EXPOSE 8080
 
-CMD ["/product-grpc"]
+CMD [ "/product-grpc" ]
